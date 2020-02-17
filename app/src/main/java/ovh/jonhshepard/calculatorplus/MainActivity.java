@@ -15,10 +15,6 @@ import java.util.Stack;
 public class MainActivity extends AppCompatActivity {
 
     private TextView textView;
-    private Map<Integer, Button> numberButtons;
-    private Map<EnumOperator, Button> operatorButtons;
-    private Button equalButton;
-
     private String value;
 
     @Override
@@ -30,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
         value = "";
 
-        numberButtons = new HashMap<>();
+        Map<Integer, Button> numberButtons = new HashMap<>();
         numberButtons.put(1, (Button) findViewById(R.id.button1));
         numberButtons.put(2, (Button) findViewById(R.id.button2));
         numberButtons.put(3, (Button) findViewById(R.id.button3));
@@ -51,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
             });
         }
 
-        operatorButtons = new HashMap<>();
+        Map<EnumOperator, Button> operatorButtons = new HashMap<>();
         operatorButtons.put(EnumOperator.ADD, (Button) findViewById(R.id.buttonPlus));
         operatorButtons.put(EnumOperator.SUBSTRACT, (Button) findViewById(R.id.buttonMinus));
         operatorButtons.put(EnumOperator.DIVIDE, (Button) findViewById(R.id.buttonDivide));
@@ -69,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
             });
         }
 
-        equalButton = findViewById(R.id.buttonEqual);
+        Button equalButton = findViewById(R.id.buttonEqual);
         equalButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -134,11 +130,8 @@ public class MainActivity extends AppCompatActivity {
     public static boolean hasPrecedence(EnumOperator op1, EnumOperator op2) {
         if (op2 == EnumOperator.PARLEFT || op2 == EnumOperator.PARRIGHT)
             return false;
-        if ((op1 == EnumOperator.MULTIPLY || op1 == EnumOperator.DIVIDE)
-                && (op2 == EnumOperator.ADD || op2 == EnumOperator.SUBSTRACT))
-            return false;
-        else
-            return true;
+        return (op1 != EnumOperator.MULTIPLY && op1 != EnumOperator.DIVIDE)
+                || (op2 != EnumOperator.ADD && op2 != EnumOperator.SUBSTRACT);
     }
 
     private int getEndOfNumber(int index) {

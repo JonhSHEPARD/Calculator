@@ -4,21 +4,19 @@ import android.content.Context;
 
 public enum EnumOperator {
 
-    ADD(R.string.buttonPlus, 2, true),
-    SUBSTRACT(R.string.buttonMinus, 2, true),
-    DIVIDE(R.string.buttonDivide, 1, true),
-    MULTIPLY(R.string.buttonMultiply, 1, true),
-    PARLEFT(R.string.buttonParLeft, 0, false),
-    PARRIGHT(R.string.buttonParRight, 0, false),
-    DOT(R.string.buttonDot, -1, false);
+    ADD(R.string.buttonPlus, true),
+    SUBSTRACT(R.string.buttonMinus, true),
+    DIVIDE(R.string.buttonDivide, true),
+    MULTIPLY(R.string.buttonMultiply, true),
+    PARLEFT(R.string.buttonParLeft, false),
+    PARRIGHT(R.string.buttonParRight, false),
+    DOT(R.string.buttonDot, false);
 
     private int stringVal;
-    private int priority;
     private boolean calcOp;
 
-    EnumOperator(int stringVal, int priority, boolean calcOp) {
+    EnumOperator(int stringVal, boolean calcOp) {
         this.stringVal = stringVal;
-        this.priority = priority;
         this.calcOp = calcOp;
     }
 
@@ -26,16 +24,8 @@ public enum EnumOperator {
         return stringVal;
     }
 
-    public int getPriority() {
-        return priority;
-    }
-
-    public boolean isCalcOp() {
-        return calcOp;
-    }
-
     public double calculate(double first, double second) {
-        if(!calcOp)
+        if (!calcOp)
             return 0;
         switch (this) {
             case ADD:
