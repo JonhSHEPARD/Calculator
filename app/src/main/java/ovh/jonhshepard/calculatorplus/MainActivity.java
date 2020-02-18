@@ -77,6 +77,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private double computeCalc() {
+        if(value.equals(""))
+            return 0;
+
         Stack<Double> valStack = new Stack<>();
         Stack<EnumOperator> opStack = new Stack<>();
 
@@ -124,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
         while (!opStack.empty())
             valStack.push(opStack.pop().calculate(valStack.pop(), valStack.pop()));
 
-        return -valStack.pop();
+        return valStack.pop();
     }
 
     public static boolean hasPrecedence(EnumOperator op1, EnumOperator op2) {
