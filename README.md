@@ -1,3 +1,3 @@
 # Calculator
 
-Basic calculator made in Android
+Basic calculator made in Java for Android
